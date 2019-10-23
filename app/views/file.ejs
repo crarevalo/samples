@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+<title><%=file.title%></title>
+<link rel="stylesheet" type="text/css" href="/jquery-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="/fonts.css" />
+<link rel="stylesheet" type="text/css" href="/dialog.css" />
+<link rel="stylesheet" type="text/css" href="/aperture/page.css" />
+<link rel="stylesheet" type="text/css" href="/aperture/file.css" />
+<script type="text/javascript" src="/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/common.js"></script>
+<script type="text/javascript" src="/dialog.js"></script>
+<script type="text/javascript" src="/aperture/page.js"></script>
+<script type="text/javascript" src="/aperture/file.js"></script>
+</head>
+
+<body>
+<form name="project_fields">
+<input type="hidden" id="project_id" name="project_id" value="<%=projectId%>" />
+<input type="hidden" id="section_id" name="section_id" value="<%=sectionId%>" />
+<input type="hidden" id="file_id" name="file_id" value="<%=file.id%>" />
+<input type="hidden" id="type_id" name="type_id" value="<%=file.type_id%>" />
+<% if (file.editable){ %><input type="hidden" id="editable" name="editable" value="editable" /><% } %>
+<input type="hidden" id="location" name="location" value="<%=file.location%>" />
+<input type="hidden" id="optional_flag" name="optional_flag" value="0" />
+<input type="hidden" id="hash" name="hash" value="" />
+</form>
+
+<div id="page">
+
+<div id="header" onmouseenter="showHeaderLinks();" onmouseleave="hideHeaderLinks();">
+<div>
+<span id="title" title="FILE ID(<%=file.id%>)"><%=file.title%></span>
+<div class="links">
+<span>[<a href="#" onclick="openProject(<%=projectId%>);return false;">close</a>]</span>
+<span>[<a id="optional" href="#" onclick="toggleOptional();return false;">more</a>]</span>
+<span>[<a href="#" onclick="openEditHeaderDialog();return false;">edit</a>]</span>
+<span>[<a href="#" onclick="detachFile();return false;">detach</a>]</span>
+<span>[<a href="#" onclick="alert('This function is NOT implemented yet.');return false;">delete</a>]</span>
+<span>[<a href="#" onclick="addToSession();return false;">session</a>]</span>
+</div>
+</div>
+<div><span id="description"><%=file.description%></span></div>
+<div class="optional"><span class="label">Status:</span><span class="value"><%=file.status.name%></span></div>
+<% if (file.projects){ %><div id="associated" class="optional"><span class="label">Associated Projects:</span><span class="value"><%=file.projects%></span></div><% } %>
+<% if (file.keywords){ %><div class="optional"><span class="label">Keywords:</span><span id="keywords" class="value"><%=file.keywords%></span></div><% } %>
+<div class="optional date">
+<span class="label">Opened</span><span id="created" class="value"><%=file.createdString ? file.createdString : "N/A"%></span>
+<span class="separator">|</span>
+<span class="label">Accessed</span><span class="value"><%=file.accessedString ? file.accessedString : "N/A"%></span>
+<span class="separator">|</span>
+<span class="label">Updated</span><span class="value"><%=file.updatedString ? file.updatedString : "N/A"%></span>
+</div>
+<hr/>
+</div>
+
+<div id="body" onmouseenter="showContentLinks();" onmouseleave="hideContentLinks();">
+<div class="links">
+<% if (file.editable){ %><span>[<a href="#" onclick="openEditContentDialog();return false;">edit</a>]</span><% } %>
+<span>[<a href="#" onclick="openDialog('upload_content');return false;">upload</a>]</span>
+<span>[<a href="/aperture/file/download/<%=file.id%>">download</a>]</span>
+</div>
+<div id="content"></div>
+</div>
+</div>
+
+<!-- dialogs -->
+
+<div id="edit_header" class="dialog">
+  <div>
+    <span class="label">Name:</span>
+    <span class="value"><input type="text" id="edit_title" name="edit_title" value="<%=file.title%>" /></span>
+  </div>
+  <div>
+    <span class="label">Created:</span>
+    <span class="value"><input type="text" maxlength="7" size="7" id="edit_created_date" name="edit_created_date" /></span>
+    <span class="value"><input type="text" maxlength="4" size="4" id="edit_created_time" name="edit_created_time" /></span>
+  </div>
+  <div>
+    <span class="label">Description:</span>
+    <br/>
+    <span class="value"><textarea id="edit_description" name="edit_description" rows="3" cols="50" maxlength="200"><%=file.description%></textarea></span>
+  </div>
+  <div>
+    <span class="label">Keywords:</span>
+    <br/>
+    <span class="value"><textarea id="edit_keywords" name="edit_keywords" rows="3" cols="50"><%=file.keywords%></textarea></span>
+  </div>
+  <div class="links">
+    <span><a href="#" onclick="saveHeader();return false;">[Save]</a></span>
+    <span><a href="#" onclick="closeDialog('edit_header');return false;">[Cancel]</a></span>
+  </div>
+</div>
+
+<div id="edit_content" class="dialog">
+  <div class="links">
+    <span><a href="#" onclick="saveContent();return false;">[Save]</a></span>
+    <span><a href="#" onclick="closeDialog('edit_content');unlockScrolling();return false;">[Cancel]</a></span>
+  </div>
+  <div>
+    <span><textarea id="edit_file_content" name="edit_file_content" rows="3" cols="50"></textarea></span>
+  </div>
+</div>
+
+<div id="upload_content" class="dialog">
+  <div class="links">
+    <span><a href="#" onclick="selectUploadFile();return false;">[Select]</a></span>
+  </div>
+  <div>
+    <span class="label">File:</span>
+    <span id="file_selection" class="value">&lt;none&gt;</span>
+  </div>
+  <div class="links">
+    <span><a href="#" onclick="uploadFile();return false;">[upload]</a></span>
+    <span><a href="#" onclick="closeDialog('upload_content');return false;">[Cancel]</a></span>
+  </div>
+</div>
+
+<form id="upload_form" name="upload_form" action="/aperture/file/upload" enctype="multipart/form-data" method="post">
+  <input type="hidden" name="project_id" value="<%=projectId%>" />
+  <input type="hidden" name="file_id" value="<%=file.id%>" />
+  <input type="hidden" name="location" value="<%=file.location%>" />
+  <input type="file" id="upload_file" name="upload_file" size="20" onchange="updateUploadDialog();" />
+  <input type="submit" name="action" value="Upload" />
+  <iframe id="upload_target" name="upload_target" src=""></iframe>
+</form>
+
+</body>
+</html>
+

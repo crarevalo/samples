@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+<title>Project: <%=project.name%></title>
+<link rel="stylesheet" type="text/css" href="/jquery-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="/fonts.css" />
+<link rel="stylesheet" type="text/css" href="/dialog.css" />
+<link rel="stylesheet" type="text/css" href="/aperture/page.css" />
+<link rel="stylesheet" type="text/css" href="/aperture/project.css" />
+<script type="text/javascript" src="/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/dialog.js"></script>
+<script type="text/javascript" src="/aperture/page.js"></script>
+<script type="text/javascript" src="/aperture/project.js"></script>
+</head>
+
+<body>
+<form name="project_fields">
+<input type="hidden" id="project_id" name="project_id" value="<%=project.id%>" />
+<input type="hidden" id="project_status_id" name="project_status_id" value="<%=project.status.id%>" />
+<input type="hidden" id="section_id" name="section_id" value="" />
+<input type="hidden" id="file_id" name="file_id" value="" />
+<input type="hidden" id="checklist_id" name="checklist_id" value="" />
+<input type="hidden" id="alarm_id" name="alarm_id" value="" />
+<input type="hidden" id="optional_flag" name="optional_flag" value="0" />
+</form>
+
+<div id="page">
+  <div id="header" onmouseenter="showHeaderLinks();" onmouseleave="hideHeaderLinks();">
+    <div>
+      <span id="title">Project: <%=project.name%><span>
+      <span id="tag">(<%=project.tag%>)</span>
+      <div class="links">
+        <span>[<a href="#" onclick="closeProject();return false;">close</a>]</span>
+        <span>[<a id="optional" href="#" onclick="toggleOptional();return false;">more</a>]</span>
+        <span>[<a href="#" onclick="openEditHeaderDialog();return false;">edit</a>]</span>
+        <span>[<a href="#" onclick="addToSession();return false;">session</a>]</span>
+      </div>
+    </div>
+    <div class="optional"><span class="label">Status:</span><span id="status" class="value"><%=project.status.name%></span></div>
+    <div class="optional date">
+      <span class="label">Opened</span><span id="created" class="value"><%=project.createdString ? project.createdString : "N/A"%></span>
+      <span class="separator">|</span>
+      <span class="label">Accessed</span><span class="value"><%=project.accessedString ? project.accessedString : "N/A"%></span>
+      <span class="separator">|</span>
+      <span class="label">Updated</span><span class="value"><%=project.updatedString ? project.updatedString : "N/A"%></span>
+    </div>
+    <hr/>
+  </div>
+
+  <div id="body" onmouseenter="showContentLinks();" onmouseleave="hideContentLinks();">
+    <div class="links">
+      <span>[<a href="#" onclick="openDialog('create_section');return false;">create section</a>]</span>
+      <span>[<a href="#" onclick="openDialog('edit_section');return false;">edit section</a>]</span>
+      <span>[<a href="#" onclick="openDialog('arrange_sections');return false;">arrange sections</a>]</span>
+    </div>
+
+    <div id="sections">
+      <%-projectImage%>
+
+      <div id="description" class="section">
+        <div class="text">
+          <div class="header"><span>Description</span></div>
+          <div class="content"><%=project.description%></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="edit_header" class="dialog">
+  <div class="links">
+    <span class="label">Name:</span>
+    <span class="value"><input type="text" id="edit_header_name" name="edit_header_name" value="" /></span>
+    <span><a href="#" onclick="renameProject();return false;">[Rename]</a></span>
+  </div>
+  <div>
+    <span class="label">Tag:</span>
+    <span class="value"><input type="text" id="edit_header_tag" name="edit_header_tag" value="" /></span>
+  </div>
+  <div>
+    <span class="label">Status:</span>
+    <span class="value">
+      <select id="edit_header_status_id" name="edit_header_status_id">
+        <% for (var i = 0; i < statusDefinitions.length; i++){ %>
+        <option value="<%=statusDefinitions[i].id%>"><%=statusDefinitions[i].name%></option>
+        <% } %>
+      </select>
+    </span>
+  </div>
+  <div>
+    <span class="label">Description:</span>
+    <br/>
+    <span class="value"><textarea id="edit_header_description" name="edit_header_description" rows="3" cols="50" maxlength="200"></textarea></span>
+  </div>
+  <div class="links">
+    <span><a href="#" onclick="saveHeader();return false;">[Save]</a></span>
+    <span><a href="#" onclick="closeDialog('edit_header');return false;">[Cancel]</a></span>
+  </div>
+</div>
+
+<div id="create_section" class="dialog">
+  <div>
+    <span class="label">Name:</span>
+    <span class="value"><input type="text" id="create_section_name" name="create_section_name" value="" /></span>
+  </div>
+  <div>
+    <span class="label">Type:</span>
+    <span class="value">
+      <select id="create_section_type_id" name="create_section_type_id">
+        <% for (var i = 0; i < sectionTypes.length; i++){ %>
+        <option value="<%=sectionTypes[i].id%>"><%=sectionTypes[i].name%></option>
+        <% } %>
+      </select>
+    </span>
+  </div>
+  <div class="links">
+    <span><a href="#" onclick="createSection();return false;">[Create]</a></span>
+    <span><a href="#" onclick="closeDialog('create_section');return false;">[Cancel]</a></span>
+  </div>
+</div>
+  
+<div id="edit_section" class="dialog">
+  <div>
+    <span class="label">Sections:</span>
+    <span class="value">
+      <select id="edit_section_id" name="edit_section_id"></select>
+    </span>
+  </div>
+  <div class="links">
+    <span class="value"><input type="text" id="edit_section_name" name="edit_section_name" value="" /></span>
+    <span><a href="#" onclick="renameSection();return false;">[Rename]</a></span>
+  </div>
+  <div class="links">
+    <span><a href="#" onclick="removeSection();return false;">[Remove]</a></span>
+    <span><a href="#" onclick="closeDialog('edit_section');return false;">[Cancel]</a></span>
+  </div>
+</div>
+  
+<div id="arrange_sections" class="dialog">
+  <div>
+    <ul id="section_order">
+    </ul>
+  </div>
+  <div class="links">
+    <span><a href="#" onclick="updateSectionOrder();return false;">[Save]</a></span>
+    <span><a href="#" onclick="closeDialog('arrange_sections');return false;">[Cancel]</a></span>
+  </div>
+</div>
+
+<div id="create_file" class="dialog">
+  <div>
+    <span class="label">Title:</span>
+    <span class="value"><input type="text" id="create_file_title" name="create_file_title" /></span>
+  </div>
+  <div>
+    <span class="label">Description:</span>
+    <br/>
+    <span class="value"><textarea id="create_file_description" name="create_file_description" rows="3" cols="50" maxlength="200"></textarea></span>
+  </div>
+  <div>
+    <span class="label">Type:</span>
+    <span class="value">
+      <select id="create_file_type_id" name="create_file_type_id">
+        <% for (var i = 0; i < fileTypes.length; i++){ %>
+        <option value="<%=fileTypes[i].id%>"><%=fileTypes[i].name%></option>
+        <% } %>
+      </select>
+    </span>
+  </div>
+  <div class="links">
+    <span><a href="#" onclick="createFile();return false;">[save]</a></span>
+    <span><a href="#" onclick="closeDialog('create_file');return false;">[cancel]</a></span>
+  </div>
+</div>
+
+<div id="add_file" class="dialog">
+  <div>
+    <span class="label">File ID:</span>
+    <span class="value"><input type="text" size="10" id="add_file_id" name="add_file_id" /></span>
+  </div>
+  <div class="links">
+    <span><a href="#" onclick="addFile();return false;">[save]</a></span>
+    <span><a href="#" onclick="closeDialog('add_file');return false;">[cancel]</a></span>
+  </div>
+</div>
+
+<div id="arrange_files" class="dialog">
+  <div>
+    <ul id="file_order">
+    </ul>
+  </div>
+ <div class="links">
+    <span><a href="#" onclick="updateFileOrder();return false;">[Save]</a></span>
+    <span><a href="#" onclick="closeDialog('arrange_files');return false;">[Cancel]</a></span>
+  </div>
+</div>
+
+<div id="edit_memo" class="dialog">
+  <div>
+    <span class="label">Memo:</span>
+    <br/>
+    <span class="value"><textarea id="edit_memo_content" name="edit_memo_content" rows="3" cols="50" maxlength="200"></textarea></span>
+  </div>
+  <div class="links">
+    <span><a href="#" onclick="saveMemo();return false;">[save]</a></span>
+    <span><a href="#" onclick="closeDialog('edit_memo');return false;">[cancel]</a></span>
+  </div>
+</div>
+
+<div id="create_alarm" class="dialog">
+  <div>
+    <span class="label">Label:</span>
+    <span class="value"><input type="text" id="create_alarm_label" name="create_alarm_label" /></span>
+  </div>
+  <div>
+    <span class="label">Comment:</span>
+    <br/>
+    <span class="value"><textarea id="create_alarm_comment" name="create_alarm_comment" rows="3" cols="50" maxlength="200"></textarea></span>
+  </div>
+  <div>
+    <span class="label">Warning:</span>
+    <span class="value"><input type="text" id="create_alarm_warning" name="create_alarm_warning" /></span>
+  </div>
+  <div>
+    <span class="label">Schedule:</span>
+    <span class="value"><input type="text" id="create_alarm_schedule" name="create_alarm_schedule" /></span>
+  </div>
+  <div class="links">
+    <span><a href="#" onclick="createAlarm();return false;">[save]</a></span>
+    <span><a href="#" onclick="closeDialog('create_alarm');return false;">[cancel]</a></span>
+  </div>
+</div> 
+
+<div id="edit_alarm" class="dialog">
+  <div>
+    <span class="label">Label:</span>
+    <span class="value"><input type="text" id="edit_alarm_label" name="edit_alarm_label" /></span>
+  </div>
+  <div>
+    <span class="label">Comment:</span>
+    <br/>
+    <span class="value"><textarea id="edit_alarm_comment" name="edit_alarm_comment" rows="3" cols="50" maxlength="200"></textarea></span>
+  </div>
+  <div>
+    <span class="label">Warning:</span>
+    <span class="value"><input type="text" id="edit_alarm_warning" name="edit_alarm_warning" /></span>
+  </div>
+  <div>
+    <span class="label">Schedule:</span>
+    <span class="value"><input type="text" id="edit_alarm_schedule" name="edit_alarm_schedule" /></span>
+  </div>
+  <div class="links">
+    <span><a href="#" onclick="saveAlarm();return false;">[save]</a></span>
+    <span><a href="#" onclick="removeAlarm();return false;">[remove]</a></span>
+    <span><a href="#" onclick="snoozeAlarm();return false;">[snooze]</a></span>
+    <span><a href="#" onclick="closeDialog('edit_alarm');return false;">[cancel]</a></span>
+  </div>
+</div>
+
+<div id="setup_checklist" class="dialog">
+  <div>
+    <span class="label">Checklist:</span>
+    <span class="value">
+      <select id="setup_checklist_id" name="setup_checklist_id">
+      <% for (var i = 0; i < checklists.length; i++){ %>
+        <option value="<%=checklists[i].id%>"><%=checklists[i].name%></option>
+      <% } %>  
+      </select>
+    </span>
+  </div>
+  <div class="links">
+    <span><a href="#" onclick="setupChecklist();">[save]</a></span>
+    <span><a href="#" onclick="closeDialog('setup_checklist');return false;">[cancel]</a></span>
+  </div>
+</div>
+
+<div id="post_task" class="dialog">
+  <div>
+    <span class="label">Description:</span>
+    <br/>
+    <span class="value"><input type="text" id="post_task_description" name="post_task_description" size="30" /></span>
+  </div>
+  <div>
+    <span class="label">Comments:</span>
+    <br/>
+    <span class="value"><textarea id="post_task_comments" name="post_task_comments" rows="3" cols="50" maxlength="200"></textarea></span>
+  </div>
+  <div class="links">
+    <span><a href="#" onclick="postTask();return false;">[save]</a></span>
+    <span><a href="#" onclick="closeDialog('post_task');return false;">[cancel]</a></span>
+  </div>
+</div>
+
+<div id="setup_xml" class="dialog">
+  <div>
+    <span class="label">XML File ID:</span>
+    <span class="value"><input type="text" id="setup_xml_file_id" name="setup_xml_file_id" /></span>
+  </div>
+  <div>
+    <span class="label">XSL File ID:</span>
+    <span class="value"><input type="text" id="setup_xml_xsl_id" name="setup_xml_xsl_id" /></span>
+  </div>
+  <div class="links">
+    <span><a href="#" onclick="setupXML();">[save]</a></span>
+    <span><a href="#" onclick="closeDialog('setup_xml');return false;">[cancel]</a></span>
+  </div>
+</div>
+
+</body>
+</html>

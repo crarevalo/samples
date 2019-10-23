@@ -1,0 +1,44 @@
+@font-face{
+  font-family: "Cutive Mono";
+  src: url("fonts/CutiveMono-Regular.ttf");
+}
+
+@font-face{
+  font-family: "Inconsolata";
+  src: url("fonts/Inconsolata-Regular.ttf");
+}
+
+@font-face{
+  font-family: "Patrick Hand SC";
+  src: url("fonts/PatrickHandSC-Regular.ttf");
+}
+
+@font-face{
+  font-family: "Permanent Marker";
+  src: url("fonts/PermanentMarker.ttf");
+}
+
+@font-face{
+  font-family: "Roboto Mono";
+  src: url("fonts/RobotoMono-Regular.ttf");
+}
+
+@font-face{
+  font-family: "Sunshiney";
+  src: url("fonts/Sunshiney.ttf");
+}
+
+@font-face{
+  font-family: "Alfa Slab One";
+  src: url("fonts/AlfaSlabOne-Regular.ttf");
+}
+
+@font-face{
+  font-family: "Bungee";
+  src: url("fonts/Bungee-Regular.ttf");
+}
+
+@font-face{
+  font-family: "Comfortaa";
+  src: url("fonts/Comfortaa-Regular.ttf");
+}

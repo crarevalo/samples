@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+<title>Project: Mimeo</title>
+<link rel="stylesheet" type="text/css" href="/jquery-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="/fonts.css" />
+<link rel="stylesheet" type="text/css" href="/mimeo/groupings.css" />
+<link rel="stylesheet" type="text/css" href="/dialog.css" />
+<script type="text/javascript" src="/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/mimeo/groupings.js"></script>
+<script type="text/javascript" src="/dialog.js"></script>
+</head>
+
+<body>
+<input type="hidden" id="edit_grouping_id" name="edit_grouping_id" value="" />
+<div>
+  <span class="content">[<a href="#" onclick="openCreateDialog();return false;">Create Group</a>]</span>
+  <span class="content">[<a href="#" onclick="window.open('/mimeo/ungrouped');return false;">Ungrouped Scans</a>]</span>
+</div>
+<div id="groupings">
+<%
+if (groupings && groupings.length){
+  for (var index = 0; index < groupings.length; index++){
+    var id = groupings[index].id;
+    var title = groupings[index].title;
+    var description = groupings[index].description;
+    var preview_path = groupings[index].cover ? ("/mimeo/link_thumbs/" + groupings[index].cover.preview_path) : "/images/no_image.png";
+    var rotation = groupings[index].cover ? groupings[index].cover.orientation : 0;
+%>
+  <div id="grouping_<%=id%>" class="grouping">
+    <div class="thumb" onclick="window.open('/mimeo/grouping/<%=groupings[index].id%>');">
+      <img class="rotated<%=rotation%>" src="<%=preview_path%>" />
+    </div>
+    <div class="caption">
+      <div class="title" onclick="openEditDialog(<%=id%>);">
+        <span id="title_<%=id%>"><%=groupings[index].title%></span>
+      </div>
+      <div class="description">
+        <span id="description_<%=id%>"><%=description ? description : ""%></span>
+      </div>
+    </div>
+  </div>
+<%
+  }
+}
+%>
+</div>
+
+<div id="create" class="dialog">
+  <div>
+    <span class="header">Title:</span>
+    <input type="text" id="create_title" name="create_title" value="" size="25" />
+  </div>
+  <div>
+    <span class="header">Description:</span>
+    <br/>
+    <textarea class="description" id="create_description" name="create_description"></textarea>
+  </div>
+  <div class="links">
+    <span><a href="#" onclick="closeDialog('create');createGroup();return false;">[Create]</a></span>
+    <span><a href="#" onclick="closeDialog('create');return false;">[Close]</a></span>
+  </div>
+</div>
+
+<div id="edit" class="dialog">
+  <div>
+    <span class="header">Title:</span>
+    <input type="text" id="modify_title" name="modify_title" value="" size="25" />
+  </div>
+  <div>
+    <span class="header">Description:</span>
+    <br/>
+    <textarea class="description" id="modify_description" name="modify_description"></textarea>
+  </div>
+  <div class="links">
+    <span><a href="#" onclick="closeDialog('edit');modifyGroup();return false;">[Modify]</a></span>
+    <span><a href="#" onclick="closeDialog('edit');deleteGroup();return false;">[Delete]</a></span>
+    <span><a href="#" onclick="closeDialog('edit');return false;">[Close]</a></span>
+  </div>
+</div>
+
+</body>
+
+</html>
+

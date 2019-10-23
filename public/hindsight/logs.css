@@ -1,0 +1,157 @@
+span.header{
+  font-family: "FreeSans", FreeSans, sans-serif;
+  font-size: 10pt;
+  font-weight:bold;
+}
+
+span.content{
+  font-family: "FreeSans", FreeSans, sans-serif;
+  font-size: 10pt;
+}
+
+a{
+  text-decoration: none;
+}
+
+a:visited, a:active, a:link{
+  color: #0000CC;
+}
+
+#result table{
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+  border-collapse: collapse;
+}
+
+#result table tr:hover{
+  background-color: #FFFF88;
+}
+
+#result table tr td{
+  vertical-align: top;
+  border-top: 1px solid #000000;
+  border-left: 1px solid #000000;
+  padding: 4px;
+  font-family: Courier;
+  font-size: 10pt;
+}
+
+#result table tr:first-child td{
+  font-weight: bold;
+  text-align: center;
+}
+
+#result table tr td:first-child{
+  white-space: nowrap;
+  border-top: 1px solid #000000;
+  border-left: 0px solid #000000;
+}
+
+#result table tr:last-child td{
+  border-bottom: 1px solid #000000;
+}
+
+#content{
+  left: 0px;
+  padding: 8px;
+  height: 550px;
+  min-height: 550px;
+  max-height: 550px;
+  background-color: #FFFFFF;
+  overflow: auto;
+} 
+      
+#controls a{
+  padding-right: 10px;
+}
+
+.log_header_section{
+  font-family: "FreeSans", FreeSans, sans-serif;
+  font-size: 12pt;
+  font-weight: normal;
+  margin: 0px 0px 20px 0px;
+}
+
+#log_title{
+  font-size: 16pt;
+  font-weight: bold;
+}
+
+#log_description{
+  font-size: 11pt;
+  font-style: italic;
+}
+
+.location_header{
+  font-weight: bold;
+  font-style: italic;
+  padding-right: 8px;
+}
+
+.location{
+  font-size: 11pt;
+  padding-left: 16px;
+}
+
+.header{
+  font-size: 11pt;
+  font-weight: bold;
+  padding-right: 8px;
+}
+
+.log_header_section .header{
+  float: left;
+}
+
+.log_type{
+  font-family: Courier;
+  font-size: 10pt;
+  font-weight: bold;
+  padding-left: 8px;
+}
+
+.date_header, .date_content{
+  color: #5C5C5C;
+}
+
+.date_header{
+  font-size: 10pt;
+  font-weight: bold;
+}
+
+.date_content{
+  font-size: 10pt;
+  font-weight: normal;
+}
+
+.relevance, .keyword{
+  font-family: "Courier New", Courier, monospace;
+  font-size: 11pt;
+  font-weight: normal;
+  padding: 0px 4px 0px 4px;
+  float: left;
+}
+
+#div_log_content{
+  font-family: "FreeSans", FreeSans, sans-serif;
+  font-size: 10pt;
+}
+
+.paragraph{
+  font-family: monospace;
+  text-indent: 1cm;
+  clear: both;
+  padding-top: 10px;
+}
+
+.line{}
+
+span.message-id{
+  font-weight: bold;
+}
+
+span.timestamp{
+  font-style: italic;
+}

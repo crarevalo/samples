@@ -1,0 +1,247 @@
+#tag {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10pt;
+  font-weight: normal;
+  font-style: italic;
+}
+#project_image {
+  width: 250px;
+  height: 300px;
+  float: right;
+  text-align: right;
+  margin: 10px;
+}
+#project_image img {
+  max-width: 100%;
+  max-height: 100%;
+}
+#description .content {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 10pt;
+}
+#sections .header {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12pt;
+  font-weight: bold;
+  padding: 4px;
+}
+#sections .content {
+  padding: 4px;
+}
+#sections .section {
+  padding-bottom: 40px;
+}
+#sections .links {
+  display: none;
+  padding-left: 8px;
+}
+#sections .grid .files {
+  clear: both;
+}
+#sections .grid .content {
+  min-height: 40px;
+  background-image: url("/aperture/grid.png");
+  background-repeat: repeat;
+}
+#sections .grid .content pre {
+  font-family: "Patrick Hand SC";
+  font-size: 16pt;
+  line-height: 26px;
+  margin: 12px 4px;
+  white-space: pre-wrap;
+}
+#sections .files table {
+  border-collapse: collapse;
+  width: 100%;
+}
+#sections .files table tr:first-child td {
+  border-top: 1px solid #4F81BD;
+}
+#sections .files table tr:last-child td {
+  border-bottom: 1px solid #4F81BD;
+}
+#sections .files table tr:nth-child(odd) td {
+  background-color: #D3DFEE;
+}
+#sections .files table tr td {
+  padding: 4px 8px;
+}
+#sections .files table tr td:first-child {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10pt;
+  min-width: 200px;
+}
+#sections .files table tr td:nth-child(2) {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 10pt;
+  font-weight: bold;
+  text-align: right;
+  min-width: 100px;
+  width: 100px;
+  max-width: 100px;
+}
+#sections .files table tr td:nth-child(3) {
+  text-align: right;
+  min-width: 80px;
+  width: 80px;
+  max-width: 80px;
+}
+#sections .files table tr td:last-child {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 10pt;
+  text-align: right;
+  min-width: 120px;
+  width: 120px;
+  max-width: 120px;
+}
+#sections .files table tr td .active {
+  color: #00C0BD;
+}
+#sections .files table tr td .stale {
+  color: #FF0000;
+}
+#sections .files table tr td .large {
+  font-weight: bold;
+}
+#sections .files .content a:link {
+  color: #000000;
+}
+#sections .files .content a:visited {
+  color: #000000;
+}
+#sections .files .content a:hover {
+  color: #FF0000;
+}
+#sections .files .content a:active {
+  color: #000000;
+}
+#sections .alarms table {
+  border-collapse: collapse;
+  width: 100%;
+}
+#sections .alarms .content a:link {
+  color: #000000;
+}
+#sections .alarms .content a:visited {
+  color: #000000;
+}
+#sections .alarms .content a:hover {
+  color: #FF0000;
+}
+#sections .alarms .content a:active {
+  color: #000000;
+}
+#sections .alarms tr:first-child td {
+  border-top: 1px solid #D28382;
+}
+#sections .alarms tr:last-child td {
+  border-bottom: 1px solid #D28382;
+}
+#sections .alarms tr:nth-child(odd) td {
+  background-color: #EFD3D2;
+}
+#sections .alarms tr td {
+  padding: 4px 8px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 10pt;
+  text-align: left;
+}
+#sections .alarms tr td:first-child {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10pt;
+  width: 75%;
+}
+#sections .text .content,
+#sections .memo .content {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 10pt;
+}
+#sections .tasks .unchecked {
+  width: 24px;
+  height: 24px;
+  float: left;
+  background-image: url("/aperture/unchecked.png");
+  cursor: pointer;
+}
+#sections .tasks .checked {
+  width: 24px;
+  height: 24px;
+  float: left;
+  background-image: url("/aperture/checked.png");
+  cursor: pointer;
+}
+#sections .tasks .crossed {
+  width: 24px;
+  height: 24px;
+  float: left;
+  background-image: url("/aperture/crossed.png");
+  cursor: pointer;
+}
+#sections .tasks .label span {
+  float: left;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10pt;
+  padding: 4px 12px;
+}
+#sections .tasks .task {
+  clear: left;
+}
+#section_order,
+#file_order {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 300px;
+  overflow-y: auto;
+}
+#section_order li,
+#file_order li {
+  margin: 0 3px 3px 3px;
+  padding: 0.4em;
+  height: 18px;
+  cursor: pointer;
+}
+.file_type {
+  width: 18px;
+  height: 18px;
+  float: right;
+}
+.file_type_1 {
+  background-image: url("/aperture/file_type_text.png");
+}
+.file_type_2,
+.file_type_3,
+.file_type_14 {
+  background-image: url("/aperture/file_type_code.png");
+}
+.file_type_4 {
+  background-image: url("/aperture/file_type_email.png");
+}
+.file_type_5 {
+  background-image: url("/aperture/file_type_image.png");
+}
+.file_type_13 {
+  background-image: url("/aperture/file_type_icon.png");
+}
+.file_type_6 {
+  background-image: url("/aperture/file_type_pdf.png");
+}
+.file_type_7 {
+  background-image: url("/aperture/file_type_audio.png");
+}
+.file_type_8 {
+  background-image: url("/aperture/file_type_video.png");
+}
+.file_type_9 {
+  background-image: url("/aperture/file_type_compressed.png");
+}
+.file_type_10 {
+  background-image: url("/aperture/file_type_word.png");
+}
+.file_type_11 {
+  background-image: url("/aperture/file_type_executable.png");
+}
+.file_type_12 {
+  background-image: url("/aperture/file_type_other.png");
+}

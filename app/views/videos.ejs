@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+<title>Project: Oritani</title>
+<link rel="stylesheet" type="text/css" href="/jquery-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="/oritani/videos.css" />
+<script type="text/javascript" src="/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/common.js"></script>
+<script type="text/javascript" src="/oritani/videos.js"></script>
+</head>
+    
+<body>
+<div id="overlay" onclick="">
+  <div id="dialog" onmouseenter="showDialogControls();" onmouseleave="hideDialogControls();">
+    <div id="header">
+      <div id="controls">
+        <a href="#" onclick="closeVideo();return false;"><img src="/images/cancel_36.png" title="Close" /></a>
+        <a href="#" onclick="return false;"><img src="/images/edit_36.png" title="Edit Information" /></a>
+        <a href="#" onclick="toggleInfo();return false;"><img src="/images/info_36.png" title="Information" /></a>
+      </div>
+    </div>
+    <div id="content"></div>
+    <div id="info">
+      <div><span id="info_title"></span></div>
+      <div><span id="info_date"></span></div>
+    </div>
+  </div>
+</div>
+<div id="results">
+<%
+if (years && years.length){
+  for (var i = 0; i < years.length; i++){
+    var year = years[i];
+    var videos = map["" + year];
+%>
+  <div class="header"><span><%=year%></span></div>
+<%
+    for (var j = 0; j < videos.length; j++){
+      var video = videos[j];
+      var yyyy = video.start_year;
+      var mm = video.start_month;
+      var dd = video.start_date;
+      var date = (yyyy && mm && dd) ? (mm + "/" + dd + "/" + yyyy) : "";
+%>
+  <div class="item">
+    <input type="hidden" id="title_<%=video.id%>" name="title_<%=video.id%>" value="<%=video.title%>" />
+    <input type="hidden" id="date_<%=video.id%>" name="date_<%=video.id%>" value="<%=date%>" />
+    <span><a href="#" onclick="openVideo('<%=video.id%>', '<%=video.path%>', <%=video.width%>, <%=video.height%>);return false;"><%=video.title%></a></span>
+  </div>
+<%
+    }
+  }   
+}     
+%>  
+</div>
+</body>
+
+</html>
+

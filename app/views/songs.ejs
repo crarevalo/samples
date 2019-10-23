@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+<title>Project: Aether</title>
+<link rel="stylesheet" type="text/css" href="/jquery-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="/aether/songs.css" />
+<script type="text/javascript" src="/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/aether/songs.js"></script>
+</head>
+
+<body>
+<div id="search">
+  <span class="header">Field:</span>
+  <span class="input">
+    <select id="field" name="field">
+      <option value="album">album</option>
+      <option value="artist">artist</option>
+      <option value="title">title</option>
+    </select>
+  </span>
+  <span class="header">Term:</span>
+  <span class="input"><input type="text" class="" size="20" id="term" name="term" /></span>
+  <span class="link">[<a href="#" onclick="doSearch();return false;">Search</a>]</span>
+  <span class="link">[<a href="#" onclick="listArtists();return false;">Artists</a>]</span>
+</div>
+<div id="player"></div>
+<div id="result"></div>
+</body>
+
+</html>
+

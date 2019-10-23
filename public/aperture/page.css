@@ -1,0 +1,76 @@
+body{
+  text-align: center;
+}
+
+a{
+  text-decoration: none;
+}
+
+.links a:link{ color: #0000FF; }
+.links a:visited{ color: #0000FF; }
+.links a:hover{ color: #FF0000; }
+.links a:active{ color: #0000FF; }
+
+.links span{
+  font-family: "Courier New", Courier, monospace;
+  font-size: 8pt;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+#title{
+  font-family: "FreeSans", FreeSans, sans-serif;
+  font-size: 16pt;
+  font-weight: bold;
+  padding-right: 5px;
+}
+
+#header .links{
+  display: none;
+  float: right;
+}
+
+#header div .label, .dialog div .label{
+  font-family: "FreeSans", FreeSans, sans-serif;
+  font-size: 10pt;
+  font-weight: bold;
+  padding-right: 4px;
+}
+
+#header div .value, .dialog div .value{
+  font-family: "FreeSans", FreeSans, sans-serif;
+  font-size: 10pt;
+}
+
+.optional{
+  display: none;
+}
+
+#header .optional.date span{
+  font-size: 8pt;
+  color: #888888;
+}
+
+#header .optional.date .separator{
+  font-size: 8pt;
+  padding: 0px 2px;
+}
+
+#body .links{
+  height: 20px;
+  text-align: right;
+}
+
+#body .links span{
+  display: none;
+}
+
+#page{
+  width: 1000px;
+  margin: 0 auto;
+  text-align: left;
+  box-shadow: 10px 10px 5px #888888;
+  background-color: #F5F5F5;
+  padding: 0.5in;
+}
+

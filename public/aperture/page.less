@@ -1,0 +1,91 @@
+body{
+  text-align: center;
+}
+
+a{
+  text-decoration: none;
+}
+
+#page{
+  width: 1000px;
+  margin: 0 auto;
+  text-align: left;
+  box-shadow: 10px 10px 5px #888888;
+  background-color: #F5F5F5;
+  padding: 0.5in;
+}
+
+.links{
+  a:link{
+    color: #0000FF;
+  }
+  a:visited{
+    color: #0000FF;
+  }
+  a:hover{
+    color: #FF0000;
+  }
+  a:active{
+    color: #0000FF;
+  }
+  
+  span{
+    font-family: "Courier New", Courier, monospace;
+    font-size: 8pt;
+    font-weight: bold;
+    text-decoration: none;
+  }
+}
+
+#title{
+  font-family: "FreeSans", FreeSans, sans-serif;
+  font-size: 16pt;
+  font-weight: bold;
+  padding-right: 5px;
+}
+
+.label-value(){
+  div{
+    .label{
+      font-family: "FreeSans", FreeSans, sans-serif;
+      font-size: 10pt;
+      font-weight: bold;
+      padding-right: 4px;
+    }
+    
+    .value{
+      font-family: "FreeSans", FreeSans, sans-serif;
+      font-size: 10pt;
+    }
+  }
+}
+
+#header{
+  .links{
+    display: none;
+    float: right;
+  }
+  
+  .label-value;
+  
+  .optional.date{
+    span{
+      font-size: 8pt;
+      color: #888888;
+    }
+    
+    .separator{
+      font-size: 8pt;
+      padding: 0px 2px;
+    }
+  }
+}
+
+.dialog{
+  .label-value;
+}
+
+.optional{
+  display: none;
+}
+

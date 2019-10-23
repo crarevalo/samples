@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<title><%=title%></title>
+<link rel="shortcut icon" type="image/png" href="/favicon.ico"/>
+<link rel="stylesheet" type="text/css" href="/index.css" />
+<script type="text/javascript" src="/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="/index.js"></script>
+<script type="text/javascript" src="/moment.js"></script>
+<script type="text/javascript" src="/moment-timezone-with-data.js"></script>
+</head>
+<body>
+<%if (username && access){%>
+<div id="user">
+<span>Signed in as <%=username%>.</span>
+<span>[<a href="/password">change password</a>]</span>
+<span>[<a href="/signout">sign out</a>]</span>
+</div>
+
+<div id="body">
+
+<div class="header">
+<span>Archive</span>
+</div>
+<hr/>
+
+<%if (access["hindsight"]){%>
+<div class="link">
+<div class="icon"><a href="/hindsight/locations"><img src="images/gateway_icon_locations.png" /></a></div>
+<div class="caption"><span><a href="/hindsight/locations">locations</a></span></div>
+</div>
+<%}%>
+
+<%if (access["blueprint"]){%>
+<div class="link">
+<div class="icon"><a href="/blueprint"><img src="images/gateway_icon_blueprint.png" /></a></div>
+<div class="caption"><span><a href="/blueprint">photos</a></span></div>
+</div>
+<%}%>
+
+<%if (access["mimeo"]){%>
+<div class="link">
+<div class="icon"><a href="/mimeo/grouping"><img src="images/gateway_icon_mimeo.png" /></a></div>
+<div class="caption"><span><a href="/mimeo/grouping">scans</a></span></div>
+</div>
+<%}%>
+
+<%if (access["oritani"]){%>
+<div class="link">
+<div class="icon"><a href="/oritani"><img src="images/gateway_icon_oritani.png" /></a></div>
+<div class="caption"><span><a href="/oritani">videos</a></span></div>
+</div>
+<%}%>
+
+<%if (access["hindsight"]){%>
+<div class="link">
+<div class="icon"><a href="/hindsight/logs"><img src="images/gateway_icon_logs.png" /></a></div>
+<div class="caption"><span><a href="/hindsight/logs">logs</a></span></div>
+</div>
+<%}%>
+
+<%if (access["hindsight"]){%>
+<div class="link">
+<div class="icon"><a href="/hindsight/texts"><img src="images/gateway_icon_sms.png" /></a></div>
+<div class="caption"><span><a href="/hindsight/texts">texts</a></span></div>
+</div>
+<%}%>
+
+<%if (access["hindsight"]){%>
+<div class="link">
+<div class="icon"><a href="/hindsight/notes"><img src="images/gateway_icon_notes.png" /></a></div>
+<div class="caption"><span><a href="/hindsight/notes">notes</a></span></div>
+</div>
+<%}%>
+
+<%if (access["hindsight"]){%>
+<div class="link">
+<div class="icon"><a href="/hindsight/emails"><img src="images/gateway_icon_email.png" /></a></div>
+<div class="caption"><span><a href="/hindsight/emails">email</a></span></div>
+</div>
+<%}%>
+
+<%if (access["deltaic"]){%>
+<div class="link">
+<div class="icon"><a href="/deltaic"><img src="images/gateway_icon_tree.png" /></a></div>
+<div class="caption"><span><a href="/deltaic">family tree</a></span></div>
+</div>
+<%}%>
+
+<%if (access["grandeur"]){%>
+<div class="link">
+<div class="icon"><a href="/grandeur/receipts"><img src="images/gateway_icon_receipts.png" /></a></div>
+<div class="caption"><span><a href="/grandeur/receipts">receipts</a></span></div>
+</div>
+<%}%>
+
+<%if (access["sorcerer"]){%>
+<div class="link">
+<div class="icon"><a href="/sorcerer/recipes"><img src="images/gateway_icon_recipes.png" /></a></div>
+<div class="caption"><span><a href="/sorcerer/recipes">recipes</a></span></div>
+</div>
+<%}%>
+
+<div class="header">
+<span>Productivity</span>
+</div>
+<hr/>
+
+<%if (access["crosscheck"]){%>
+<div class="link">
+<div class="icon"><a href="/crosscheck"><img src="images/gateway_icon_crosscheck.png" /></a></div>
+<div class="caption"><span><a href="/crosscheck">crosscheck</a></span></div>
+</div>
+<%}%>
+
+<%if (access["aperture"]){%>
+<div class="link">
+<div class="icon"><a href="/aperture"><img src="images/gateway_icon_aperture.png" /></a></div>
+<div class="caption"><span><a href="/aperture">aperture</a></span></div>
+</div>
+<%}%>
+
+<%if (access["aether"]){%>
+<div class="link">
+<div class="icon"><a href="/aether"><img src="images/gateway_icon_aether.png" /></a></div>
+<div class="caption"><span><a href="/aether">aether</a></span></div>
+</div>
+<%}%>
+
+<%if (access["grandeur"]){%>
+<div class="link">
+<div class="icon"><a href="/grandeur/markets"><img src="images/gateway_icon_trend.png" /></a></div>
+<div class="caption"><span><a href="/grandeur/markets">grandeur</a></span></div>
+</div>
+<%}%>
+
+<%if (access["chat"]){%>
+<div class="link">
+<div class="icon"><a href="/chat"><img src="images/gateway_icon_chat.png" /></a></div>
+<div class="caption"><span><a href="/chat">chat</a></span></div>
+</div>
+<%}%>
+
+<%if (access["aperture"]){%>
+<div class="link">
+<div class="icon"><a href="/aperture/changelog"><img src="images/gateway_icon_changelog.png" /></a></div>
+<div class="caption"><span><a href="/aperture/changelog">change log</a></span></div>
+</div>
+<%}%>
+
+</div>
+<%}else{%>
+<div id="login">
+<span>[<a href="/signup">sign up</a>]</span>
+<span>[<a href="/signin">sign in</a>]</span>
+</div>
+<%}%>
+
+</body>
+</html>

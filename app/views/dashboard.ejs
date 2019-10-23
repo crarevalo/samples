@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Aperture Dashboard</title>
+<link rel="stylesheet" type="text/css" href="/jquery-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="/fonts.css" />
+<link rel="stylesheet" type="text/css" href="/dialog.css" />
+<link rel="stylesheet" href="/aperture/dashboard.css" type="text/css" />
+<script type="text/javascript" src="/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/chart.min.js"></script>
+<script type="text/javascript" src="/dialog.js"></script>
+<script type="text/javascript" src="/aperture/dashboard.js"></script>
+
+</head>
+<body>
+
+<form name="dashboard_fields">
+<input type="hidden" id="project_group_id" name="project_group_id" value="" />
+</form>
+
+<div id="container">
+
+<div id="title" class="region">
+  <div class="content"><span>&nbsp;</span></div>
+</div>
+
+<div id="bulletin"></div>
+
+<div id="projects">
+  <div id="browser">
+    <div class="accordion">
+      <h3>
+        <span class="label">Search</span>
+        <span class="value"><input type="text" id="search_term" name="search_term" size="20" onkeyup="search();" /></span>
+        <div class="group_link">
+          <span><a href="#" onclick="loadLastSession();return false;">[load last session]</a></span>
+          <span><a href="#" onclick="openManageGroupsDialog();return false;">[manage groups]</a></span>
+        </div>
+      </h3>
+      <div id="result" class="content"></div>
+    </div>
+  </div>
+  <div id="rankings">
+    <div class="accordion">
+      <h3>Most Recently Accessed</h3>
+      <div id="recent_access" class="content"></div>
+      <h3>Most Recently Updated</h3>
+      <div id="recent_update" class="content"></div>
+      <h3>Most Accessed</h3>
+      <div id="count_access" class="content"></div>
+      <h3>Most Updated</h3>
+      <div id="count_update" class="content"></div>
+      <h3>Most Content By File Count</h3>
+      <div id="count_file" class="content"></div>
+    </div>
+  </div>
+</div>
+
+<div id="stats">
+  <div id="line"><canvas id="line_canvas" class="chart" onclick="openConfigStatsDialog();return false;"></canvas></div>
+  <div id="pie"><canvas id="pie_canvas" class="chart" onclick="return false;"></canvas></div>
+</div>
+
+</div>
+
+<div id="manage_groups" class="dialog">
+  <div class="links">
+    <span class="label">Create:</span>
+    <span class="value"><input type="text" id="create_group_name" name="create_group_name" value="" /></span>
+    <span><a href="#" onclick="createGroup();return false;">[OK]</a></span>
+  </div>
+  <div class="links">
+    <span class="label">Delete:</span>
+    <span class="value">
+      <select id="delete_group_id" name="delete_group_id"></select>
+    </span>
+    <span><a href="#" onclick="deleteGroup();return false;">[OK]</a></span>
+  </div>
+  <div id="project_group_selections">
+    <ul id="unselected_groups" class="connectedSortable"></ul>
+    <ul id="selected_groups" class="connectedSortable"></ul>
+  </div>
+  <div class="links">
+    <span><a href="#" onclick="applyGroupSelections();return false;">[Apply Selections]</a></span>
+    <span><a href="#" onclick="closeDialog('manage_groups');return false;">[Close]</a></span>
+  </div>
+</div>
+
+<div id="update_group" class="dialog">
+  <div>
+    <span class="label">Rename:</span>
+    <span class="value"><input type="text" id="update_group_name" name="update_group_name" value="" /></span>
+  </div>
+  <div id="update_group_projects">
+    <ul id="unselected_projects" class="connectedSortable"></ul>
+    <ul id="selected_projects" class="connectedSortable"></ul>
+  </div>
+  <div class="links">
+    <span><a href="#" onclick="updateGroup();return false;">[Update]</a></span>
+    <span><a href="#" onclick="closeDialog('update_group');return false;">[Close]</a></span>
+  </div>
+</div>
+
+<div id="config_stats" class="dialog">
+  <div>
+    <span class="label">Line Chart Start:</span>
+    <span class="value"><input type="text" id="config_stats_start" name="config_stats_start" value="" size="7" maxlength="7" /></span>
+  </div>
+  <div>
+    <span class="label">Pie Chart Month:</span>
+    <span class="value"><input type="text" id="config_stats_month" name="config_stats_month" value="" size="2" maxlength="2" /></span>
+  </div>
+  <div>
+    <span class="label">Pie Chart Year:</span>
+    <span class="value"><input type="text" id="config_stats_year" name="config_stats_year" value="" size="4" maxlength="4" /></span>
+  </div>
+  <div class="links">
+    <span><a href="#" onclick="closeDialog('config_stats');loadStats();return false;">[Apply]</a><span>
+    <span><a href="#" onclick="closeDialog('config_stats');return false;">[Close]</a></span>
+  </div>
+</div>
+
+</body>
+</html>
+

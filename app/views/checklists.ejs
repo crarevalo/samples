@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+<title>Project: Crosscheck</title>
+<link rel="stylesheet" type="text/css" href="/jquery-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="/crosscheck/checklists.css" />
+<script type="text/javascript" src="/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/common.js"></script>
+<script type="text/javascript" src="/crosscheck/checklists.js"></script>
+</head>
+<body>
+<div id="dialog_overlay"> 
+  <div id="create_dialog">
+    <form name="create_checklist" method="post" action="crosscheck/create">
+      <div class="dialog_header">
+        <span>Create Checklist</span>
+      </div>
+      <div class="form_section">
+        <span class="field_label">Name:</span>
+        <span>
+          <input type="text" class="" maxlength="30" size="30" name="name"/>
+        </span>
+      </div>
+      <div class="form_section">
+        <span class="field_label">Description:</span>
+        <br/>
+        <textarea class="" name="description" rows="3"></textarea>
+      </div>
+      <div class="form_section">
+        <span class="field_label">Start:</span>
+        <span>
+          <input type="text" class="" maxlength="10" size="10" id="start" name="start"/>
+        </span>
+        <span class="field_label">End:</span>
+        <span>
+          <input type="text" class="" maxlength="10" size="10" id="end" name="end"/>
+        </span>
+      </div>
+      <div class="form_section">
+        <span class="checkbox_field">
+          <input type="checkbox" name="ages" value="1"/>Items Age
+        </span>
+        <span class="checkbox_field">
+          <input type="checkbox" name="resets" value="1"/>List Resets
+        </span>
+      </div>
+      <div class="form_section">
+        <span class="link">[<a href="#" onclick="submitCreateDialog();return false;">Submit</a>]</span>
+        &nbsp;
+        <span class="link">[<a href="#" onclick="hideCreateDialog();return false;">Cancel</a>]</span>
+      </div>
+    </form>
+  </div>
+</div>
+<div id="page">
+  <div id="header">
+    <div id="title">
+      <span>Checklists</span>
+    </div>
+    <div id="controls">
+      <span class="link">[<a href="#" onclick="showCreateDialog();return false;">Create</a>]</span>
+    </div>
+  </div>
+  <div id="content"></div>
+</div>
+</body>
+</html>

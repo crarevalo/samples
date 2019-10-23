@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+<title>Project: Hindsight</title>
+<link rel="stylesheet" type="text/css" href="/jquery-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="/hindsight/logs.css" />
+<link rel="stylesheet" type="text/css" href="/fonts.css" />
+<link rel="stylesheet" type="text/css" href="/dialog.css" />
+<script type="text/javascript" src="/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/hindsight/logs.js"></script>
+<script type="text/javascript" src="/dialog.js"></script>
+</head>
+
+<body>
+<input type="hidden" id="user_id" name="user_id" value="0" />
+<div> 
+  <span class="content">[<a href="#" onclick="openSearchDialog();">Search</a>]</span>
+  <span id="search_info" class="content"></span>
+</div>  
+<div id="result"></div>
+
+<div id="search" class="dialog">
+  <div>
+    <span class="header">Start:</span>
+    <input type="text" class="" maxlength="8" size="8" id="date_start" name="date_start" autocomplete="off" />
+    <input type="text" class="" maxlength="4" size="4" id="time_start" name="time_start" autocomplete="off" />
+    <span class="header">End:</span>
+    <input type="text" class="" maxlength="8" size="8" id="date_end" name="date_end" autocomplete="off" />
+    <input type="text" class="" maxlength="4" size="4" id="time_end" name="time_end" autocomplete="off" />
+  </div>
+  <div>
+    <span class="header">Keyword:</span>
+    <input type="text" class"" size="20" id="search_term" name="search_term" autocomplete="off" />
+  </div>
+  <div class="links">
+    <span><a href="#" onclick="closeDialog('search');searchLogs();return false;">[Search]</a></span>
+    <span><a href="#" onclick="closeDialog('search');return false;">[Close]</a></span>
+  </div>
+</div>
+
+<div id="display">
+  <div id="controls">
+    <a href="#" onclick="closeLog();return false;"><img src="/images/cancel_36.png" title="Close" /></a>
+    <a href="#" onclick="return false;"><img src="/images/edit_36.png" title="Edit Information" /></a>
+    <a href="#" onclick="return false;"><img src="/images/info_36.png" title="Information" /></a>
+  </div>
+  <div id="content"></div>
+</div>
+
+</body>
+</html>

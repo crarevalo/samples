@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+<title><%=header ? header.title : ""%></title>
+<link rel="stylesheet" type="text/css" href="/jquery-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="/mimeo/scans.css" />
+<link rel="stylesheet" type="text/css" href="/fonts.css" />
+<link rel="stylesheet" type="text/css" href="/dialog.css" />
+<script type="text/javascript" src="/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/common.js"></script>
+<script type="text/javascript" src="/mimeo/scans.js"></script>
+<script type="text/javascript" src="/dialog.js"></script>
+</head>
+
+<body>
+<input type="hidden" id="grouping_id" name="grouping_id" value="<%=(header && header.id) ? header.id : ""%>" />
+<input type="hidden" id="scan_id" name="scan_id" value="" />
+<div id="overlay" onmousemove="showDialogControls();">
+  <div id="controls">
+    <a href="#" onclick="closeScan();return false;"><img src="/images/cancel_36.png" title="Close" /></a>
+    <a href="#" onclick="return false;"><img src="/images/edit_36.png" title="Edit Information" /></a>
+    <a href="#" onclick="rotateScan();return false;"><img src="/images/rotate_36.png" title="Rotate" /></a>
+    <a href="#" onclick="openAddDialog();return false;"><img src="/images/add_circle_36.png" title="Add" /></a>
+<%
+if (header && header.id){
+%>
+    <a href="#" onclick="removeScan();return false;"><img src="/images/remove_circle_36.png" title="Remove" /></a>
+<%
+}
+%>
+    <a href="#" onclick="setAsCover();return false;"><img src="/images/star_36.png" title="Set As Cover" /></a>
+    <a href="#" onclick="downloadScan();return false;"><img src="/images/download_36.png" title="Download" /></a>
+  </div>
+  <div id="dialog"></div>
+</div>
+<div>
+<div id="scans">
+<%
+if (scans && scans.length){
+  for (var index = 0; index < scans.length; index++){
+    var scan = scans[index];
+    var id = scan.id;
+    var preview_path = scan.preview_path ? "/mimeo/link_thumbs/" + scan.preview_path : "";
+    var display_path = scan.display_path ? scan.display_path : "";
+    var rotation = scan.orientation;
+%>
+  <div class="thumb" onclick="openScan(<%=id%>, '<%=display_path%>');">
+    <input type="hidden" id="rotation_<%=id%>" name="rotation_<%=id%>" value="<%=rotation%>" />
+    <div><img id="thumb_<%=id%>" class="rotated<%=rotation%>" src="<%=preview_path%>" /></div>
+  </div>
+<%
+  }
+}
+%>
+</div>
+
+<div id="add" class="dialog">
+  <div>
+    <span class="header">Group:</span>
+    <select id="add_grouping_id" name="add_grouping_id">
+<%
+if (groupings && groupings.length){
+  for (let i = 0; i < groupings.length; i++){
+    var id = groupings[i].id;
+    var title = groupings[i].title;
+%>
+      <option value="<%=id%>"><%=title%>
+<%
+  }
+}
+%>
+    </select>
+  </div>
+  <div class="links">
+    <span><a href="#" onclick="closeDialog('add');addScan();return false;">[Add]</a></span>
+    <span><a href="#" onclick="closeDialog('add');return false;">[Close]</a></span>
+  </div>
+</div>
+
+</div>
+</body>
+
+</html>

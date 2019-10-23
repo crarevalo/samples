@@ -1,0 +1,59 @@
+a{
+  text-decoration: none;
+}
+
+a:link{ color: #000000; }
+a:visited{ color: #000000; }
+a:hover{color: #FF0000; }
+a:active{ color: #000000; }
+
+#user{
+  float: right;
+  font-weight: bold;
+}
+
+#login span, #user span{
+  font-family: "Courier";
+  font-size: 10pt;
+  padding-right: 4px;
+}
+
+#body{
+  margin: 0 auto;
+  width: 50%;
+  text-align: center;
+}
+
+.header{
+  clear: both;
+  padding-top: 1in;
+  width: 100%;
+  text-align: left;
+}
+
+.header span{
+  font-family: Arial;
+  font-size: 20pt;
+  font-weight: bold;
+}
+
+.link{
+  width: 96px;
+  float: left;
+  margin-left: 0.5in;
+  margin-top: 0.5in;
+}
+
+.icon{
+  width: 96px;
+}
+
+.caption{
+  font-family: Arial;
+  font-size: 12pt;
+  font-weight:bold;
+  width: 96px;
+  text-align: center;
+  padding-top: 4px;
+}
+

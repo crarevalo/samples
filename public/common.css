@@ -1,0 +1,8 @@
+div.loading{
+  width: 100%; 
+  text-align: center;
+} 
+
+div.loading img{
+  margin: 0 auto;
+}

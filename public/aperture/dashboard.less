@@ -1,0 +1,268 @@
+@link-base: #000000;
+@link-hover: #FF0000;
+@files-border: #000000;
+@base-url: "/aperture";
+@font-sans: Arial, Helvetica, sans-serif;
+@font-mono: "Courier New", Courier, monospace;
+@font-memo: "Permanent Marker";
+@font-base-size: 10pt;
+@alarm-background: #FF5555;
+@memo-background: #EAE762;
+
+a{
+  text-decoration: none;
+  
+  &:link{
+    color: @link-base;
+  }
+  &:visited{
+    color: @link-base;
+  }
+  &:hover{
+    color: @link-hover;
+  }
+  &:active{
+    color: @link-base;
+  }
+}
+
+.links{
+  a:link{
+    color: #0000FF;
+  }
+  a:visited{
+    color: #0000FF;
+  }
+  a:hover{
+    color: #FF0000;
+  }
+  a:active{
+    color: #0000FF;
+  }
+
+  span{
+    font-family: @font-mono;
+    font-size: 8pt;
+    font-weight: bold;
+    text-decoration: none;
+  }
+}
+
+body{
+  margin: 0px;
+  padding: 0px;
+}
+
+#container{
+  width: 80%;
+  margin: 0 auto;
+  text-align: left;
+}
+
+#title{
+  height: 30px;
+  padding: 20px 0px;
+
+  span{
+    font-family: "Comfortaa";
+    font-size: @font-base-size + 12;
+    font-weight: bold;
+  }
+}
+
+div{
+  .label{
+    font-family: "FreeSans", FreeSans, sans-serif;
+    font-size: 10pt;
+    font-weight: bold;
+    padding-right: 10px;
+   }
+    
+  .value{
+    font-family: "FreeSans", FreeSans, sans-serif;
+    font-size: 10pt;
+  }
+}
+
+#bulletin{
+  float: left;
+  height: 270px;
+
+  .container{
+    display: none;
+  }
+}
+
+.alarm div{
+  background-color: @alarm-background;
+}
+
+.memo div{
+  background-color: @memo-background;
+}
+
+.alarm, .memo{
+  float: left;
+  padding: 20px;
+  cursor: pointer;
+
+  div{
+    color: #333;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 10px 10px 2px rgba(0,0,0,0.3);
+
+    -webkit-transform: rotate(2deg);
+    -moz-transform: rotate(2deg);
+    -o-transform: rotate(2deg);
+    -ms-transform: rotate(2deg);
+    transform: rotate(2deg);
+
+    pre{
+      font-family: @font-memo;
+      font-size: 18px;
+      margin: 0px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      overflow: hidden;
+    }
+  }
+}
+
+#projects{
+  width: 550px;
+  float: right;
+}
+
+#browser{
+  height: 500px;
+}
+
+#rankings{
+  height: 340px;
+}
+
+#rankings, #browser{
+  width: 550px;
+
+  .ui-accordion-header{
+    font-family: @font-sans;
+    font-size: @font-base-size;
+    font-weight: bold;
+    padding: 6px;
+  }
+
+  .ui-accordion-content{
+    padding: 20px
+  }
+
+  .ui-corner-all, .ui-corner-top, .ui-corner-left, .ui-corner-tl{
+    border-radius: 0px;
+  }
+
+  table{
+    border-collapse: collapse;
+    width: 100%;
+
+    tr{
+      &:first-child td{
+        border-top: 1px solid @files-border;
+      }
+
+      &:last-child td{
+        border-bottom: 1px solid @files-border;
+      }
+
+      td{
+        font-family: @font-sans;
+        font-size: @font-base-size;
+        padding: 4px 8px;
+
+        &:first-child{
+          font-family: @font-sans;
+          font-size: @font-base-size;
+        }
+
+        &:last-child{
+          font-family: @font-sans;
+          font-size: @font-base-size;
+          text-align: right;
+        }
+      } 
+    }
+  }
+}
+
+#stats{
+  float: left;
+
+  #line{
+    float: left;
+    width: 500px;
+    height: 350px;
+    padding: 150px 20px 0px 20px;
+  }
+
+  #pie{
+    float: left;
+    width: 350px;
+    height: 350px;
+    padding: 150px 20px 0px 20px;
+  }
+
+  div canvas{
+    cursor: pointer;
+  }
+
+  .error{
+    font-family: @font-sans;
+    font-weight: bold;
+    font-size: 8pt;
+  }
+}
+
+#project_group_selections, #update_group_projects{
+  overflow: auto;
+  height: 230px;
+}
+
+#unselected_groups, #selected_groups, #unselected_projects, #selected_projects{
+  border: 1px solid #E2E2E2;
+  width: 210px;
+  height: 220px;
+  min-height: 20px;
+  list-style-type: none;
+  margin: 0;
+  padding: 5px 0 0 0;
+  float: left;
+  margin-right: 10px;
+
+  li{
+    margin: 0 5px 5px 5px;
+    padding: 4px;
+    font-size: 1.2em;
+    width: 190px;
+  }
+}
+
+.group_link{
+  float:  right;
+  padding-right: 10px;
+  font-weight: normal;
+  font-family: Courier;
+  padding-top: 6px;
+
+  a:hover{
+    color: #FF0000;
+  }
+  
+  span{
+    font-family: "Courier New", Courier, monospace;
+    font-size: 8pt;
+    font-weight: bold;
+    text-decoration: none;
+  }
+}
+

@@ -1,0 +1,141 @@
+body{
+  text-align: center;
+  font-family: Arial;
+}
+
+a:link {text-decoration: none;}
+a:visited {text-decoration: none;}
+a:active {text-decoration: none;}
+a:hover {text-decoration: none; color: #777777;}
+
+#controls .link{
+  font-family: Courier;
+  font-weight: normal;
+  font-size: 8pt;
+}
+
+#page{
+  width: 800px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+#header{
+  width: 100%;
+  height: 20px;
+  margin-top: 40px;
+  padding: 10px;
+  color: #FFFFFF;
+  background-color: #660000;
+  text-align: left;
+}
+
+#title{
+  float: left;
+}
+
+#title span{
+  color: #FFFFFF;
+  font-size: 14pt;
+  font-weight: bold;
+}
+
+#controls{
+  float: right;
+}
+
+#controls a:link {text-decoration: none; color: #FFFFFF;}
+#controls a:visited {text-decoration: none; color: #FFFFFF;}
+#controls a:active {text-decoration: none; color: #FFFFFF;}
+#controls a:hover {text-decoration: none; color: #777777;}
+
+
+#content, #page table{
+  width: 100%;
+  margin: 10px;
+  font-size: 11pt;
+}
+
+#content table{
+  border: 0px;
+  border-collapse: separate;
+}
+
+#dialog_overlay{
+  display: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 10;
+  width: 100%;
+  height: 900px;
+}
+
+#create_dialog{
+  position: relative;
+  width: 600px;;
+  height: 300px;
+  margin: 0 auto;
+  text-align: left;
+  z-index: 20;
+  background-color: #FFFFFF;
+
+  visibility: hidden;
+  opacity: 0;
+  padding: 4px;
+  border: 1px solid #CCCCCC;
+  border-radius: 5px;
+  box-shadow: 10px 10px 5px #444444;
+  background-color: #F5F5F5;
+  transition: all 1s ease;
+  -moz-transition: all 1s ease; /* Firefox 4 */
+  -webkit-transition: all 1s ease; /* Safari and Chrome */
+  -o-transition: all 1s ease; /* Opera */
+}
+
+.dialog_header{
+  padding: 10px 10px;
+}
+
+div.form_section{
+  padding: 10px 20px;
+}
+
+.dialog_header span{
+  font-size: 16pt;
+  font-weight: bold;
+}
+
+span.field_label{
+  font-family: Arial;
+  font-size: 10pt;
+  font-weight: bold;
+}
+
+span.checkbox_field{
+  font-family: Arial;
+  font-size: 10pt;
+  font-weight: bold;
+  margin-right: 15px;
+  vertical-align: middle;
+} 
+
+div.form_section textarea{
+  width: 99%;
+}
+
+div.form_section .link{
+  font-family: Courier;
+  font-weight: bold;
+  font-size: 10pt;
+}
+
+div.loading{
+  width: 100%;
+  text-align: center;
+}
+
+div.loading img{
+  margin: 0 auto;
+}

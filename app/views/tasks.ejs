@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+<title>Project: Crosscheck</title>
+<link rel="stylesheet" type="text/css" href="/jquery-ui.min.css" />
+<link rel="stylesheet" type="text/css" href="/common.css" />
+<link rel="stylesheet" type="text/css" href="/crosscheck/tasks.css" />
+</head>
+
+<body>
+<form name="page_data">
+<input type="hidden" id="checklist_id" name="checklist_id" value="<%=checklist.id%>" />
+</form>
+<div id="loader_overlay">
+  <div id="loader" class="loading">
+    <img src="/ajax_loader_gray_48.gif" />
+  </div>
+</div>
+<div id="dialog_overlay">
+  <div id="edit_dialog" class="dialog">
+    <form name="edit_checklist" method="post" action="crosscheck/edit">
+      <div class="dialog_header">
+        <span>Edit Checklist</span>
+      </div>
+      <div class="form_section">
+        <span class="field_label">Name:</span>
+        <span>
+          <input type="text" class="" maxlength="30" size="30" name="name"/>
+        </span>
+      </div>
+      <div class="form_section">
+        <span class="field_label">Description:</span>
+        <br/>
+        <textarea class="fillrow" name="description" rows="3"></textarea>
+      </div>
+      <div class="form_section">
+        <span class="field_label">Start:</span>
+        <span>
+          <input type="text" class="" maxlength="10" size="10" id="start" name="start"/>
+        </span>
+        <span class="field_label">End:</span>
+        <span>
+          <input type="text" class="" maxlength="10" size="10" id="end" name="end"/>
+        </span>
+      </div>
+      <div class="form_section">
+        <span class="checkbox_field">
+          <input type="checkbox" name="ages" value="1"/>Items Age
+        </span>
+        <span class="checkbox_field">
+          <input type="checkbox" name="resets" value="1"/>List Resets
+        </span>
+      </div>
+      <div class="form_section">
+        <span class="link">[<a href="#" onclick="submitEditDialog();return false;">Submit</a>]</span>
+        &nbsp;
+        <span class="link">[<a href="#" onclick="hideEditDialog();return false;">Cancel</a>]</span>
+      </div>
+    </form>
+  </div>
+  <div id="post_dialog" class="dialog">
+    <form name="post_task" method="post" action="crosscheck/post">
+      <div class="dialog_header">
+        <span>Post Task</span>
+      </div>
+      <div class="form_section">
+        <span class="field_label">Description:</span>
+        <br/>
+        <span>
+          <input class="fillrow" type="text" name="description"/>
+        </span> 
+      </div>
+      <div class="form_section">
+        <span class="field_label">Comment:</span>
+        <br/>
+        <textarea class="fillrow" name="comment" rows="3"></textarea>
+      </div>
+      <div class="form_section">
+        <span class="link">[<a href="#" onclick="submitPostDialog();return false;">Post</a>]</span>
+        &nbsp;
+        <span class="link">[<a href="#" onclick="hidePostDialog();return false;">Cancel</a>]</span>
+      </div>
+    </form>
+  </div>
+  <div id="update_dialog" class="dialog">
+    <form name="update_task" method="post" action="crosscheck/update">
+      <div class="dialog_header">
+        <span>Update Task</span>
+      </div>
+      <div class="form_section">
+        <span class="field_label">Description:</span>
+        <br/>
+        <span>
+          <input class="fillrow" type="text" name="description"/>
+        </span> 
+      </div>
+      <div class="form_section">
+        <span class="field_label">Comment:</span>
+        <br/>
+        <textarea class="fillrow" name="comment" rows="3"></textarea>
+      </div>
+      <div class="form_section">
+        <span class="link">[<a id="update_dialog_submit" href="#">Save</a>]</span>
+      </div>
+      <div class="form_section">&nbsp;</div>
+      <div id="task_membership" class="form_section"></div>
+      <div class="form_section">
+        <span class="link">[<a href="#" onclick="hideUpdateDialog();return false;">Close</a>]</span>
+      </div>
+    </form>
+  </div>
+</div>
+<div id="page">
+  <div id="header">
+    <div id="title">
+      <span id="checklist_name"><%=checklist.name%></span>
+    </div>
+    <div id="controls">
+      <span class="link">[<a href="#" onclick="showPostDialog();return false;">Post</a>]</span>
+      <span class="link">[<a href="#" onclick="showEditDialog();return false;">Edit</a>]</span>
+      <span class="link">[<a href="#" onclick="applyChanges();return false;">Apply</a>]</span>
+      <span class="link">[<a href="#" onclick="closeChecklist();return false;">Close</a>]</span>
+    </div>
+  </div>
+  <div id="content"></div>
+</div>
+</body>
+<script type="text/javascript" src="/jquery-3.0.0.min.js"></script>
+<script type="text/javascript" src="/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/common.js"></script>
+<script type="text/javascript" src="/crosscheck/tasks.js"></script>
+</html>
+

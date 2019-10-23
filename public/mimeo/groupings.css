@@ -1,0 +1,93 @@
+span.header{
+  font-family: "FreeSans", FreeSans, sans-serif;
+  font-size: 10pt;
+  font-weight:bold;
+}
+  
+span.content{
+  font-family: "FreeSans", FreeSans, sans-serif;
+  font-size: 10pt;
+}
+
+a{
+  text-decoration: none;
+}
+
+a:visited, a:active, a:link{
+  color: #000000;
+}
+
+textarea.description{
+  width: 400px;
+  height: 50px;
+}
+
+.grouping{
+  float: left;
+  width: 400px;
+  height: 200px;
+  margin: 20px;
+  box-shadow:4px 4px 4px #AAA;
+  background-color:#EED;
+}
+
+.grouping .thumb{
+  width: 180px;
+  height: 180px;
+  cursor: pointer;
+  float: left;
+  margin: 0 auto;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.grouping .caption{
+  float: left;
+  width: 180px;
+  margin: 10px;
+}
+
+.grouping .caption .title{
+  cursor: pointer;
+}
+
+.grouping .caption .title span{
+  font-family: "Arial";
+  font-size: 12pt;
+  font-weight: bold;
+}
+
+.grouping .caption .description{
+  margin-top: 8px;
+}
+
+.grouping .caption .description span{
+  font-family: "Arial";
+  font-size: 12pt;
+}
+
+img.rotated0{
+  box-shadow: 5px 5px 5px 0px #333333;
+}
+
+img.rotated1{
+  box-shadow: 5px -5px 5px 0px #333333;
+  -ms-transform: rotate(90deg);
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg) translate(20%, 0%);
+}
+
+img.rotated2{
+  box-shadow: -5px -5px 5px 0px #333333;
+  -ms-transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+}
+
+img.rotated3{
+  box-shadow: -5px 5px 5px 0px #333333;
+  -ms-transform: rotate(270deg);
+  -webkit-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
+
