@@ -2,7 +2,7 @@ import React, {Component, Fragment} from "react";
 import axios from "axios";
 import { Line } from 'react-chartjs-2';
 
-const AVBASE = "";
+const AVBASE = "https://api.worldtradingdata.com/api/v1/history"; //"https://www.alphavantage.co/query?function=TIME_SERIES_DAILY";
 const SYMBOL = "symbol=";
 const DATEFROM = "date_from=";
 const APIKEY = "";

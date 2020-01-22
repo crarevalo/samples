@@ -21,9 +21,10 @@ function onSelectFile(){
   jQuery("#upload_form input[name='upload_file']").click();
 }
 
-function onSelectFileChange(){
+function onSelectFileChange(callback){
   const filename = jQuery("#upload_form input[name='upload_file']").val();
   jQuery("#file_selection").html(filename);
+  if (callback) callback.call();
 }
 
 function onSubmit(){
@@ -38,13 +39,17 @@ function onIFrameLoad(uploadCallback){
   }
 }
 
-const UploadFile = ({location, onUpload}) =>
-  <Fragment>
-    <ActionLink onClick={onSelectFile} className="link">Select File</ActionLink>
-    <span id="file_selection" style={fileSelectionStyle}>&lt;none&gt;</span>
-    <ActionLink onClick={onSubmit} className="link">Upload</ActionLink>
-    <UploadForm location={location} onSelectFileChange={onSelectFileChange} onUpload={() => onIFrameLoad(onUpload)} />
-  </Fragment>
+const UploadFile = function({location, onFileSelection, onUpload}){
+  
+  return (
+    <Fragment>
+      <ActionLink onClick={onSelectFile} className="link">Select File</ActionLink>
+      <span id="file_selection" style={fileSelectionStyle}>&lt;none&gt;</span>
+      <ActionLink onClick={onSubmit} className="link">Upload</ActionLink>
+      <UploadForm location={location} onSelectFileChange={() => onSelectFileChange(onFileSelection)} onUpload={() => onIFrameLoad(onUpload)} />
+    </Fragment>
+  );
+};
 
 const UploadForm = ({location, onSelectFileChange, onUpload}) =>
   <form id="upload_form" name="upload_form" action="/grandeur/receipts/upload" encType="multipart/form-data" method="post" target="upload_target" style={formStyle}>

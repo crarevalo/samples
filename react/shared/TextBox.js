@@ -1,11 +1,19 @@
 import React from "react";
 
 const TextBox = ({
+  label,
   content,
   onChange,
   onKeyPress,
-  className
+  className,
+  isVertical,
+  refInput,
+  ...rest
 }) =>
-  <textarea className={className} value={content} onChange={onChange} onKeyPress={onKeyPress}></textarea>
+  <div className={className}>
+    <label>{label}</label>
+    {isVertical && <br/>}
+    <textarea ref={refInput} className={className} onChange={onChange} onKeyPress={onKeyPress} value={content} {...rest} />
+  </div>
 
 export default TextBox;

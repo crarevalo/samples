@@ -31,6 +31,7 @@ class App extends Component{
         amount : ""
       },
       data : null,
+      selectedRowId : null,
       receiptURL : null,
       formFields : {
         id : "",
@@ -52,6 +53,7 @@ class App extends Component{
     this.onSearchClose = this.onSearchClose.bind(this);
     this.onSearchSubmit = this.onSearchSubmit.bind(this);
     this.onImportFormChange = this.onImportFormChange.bind(this);
+    this.onFileSelection = this.onFileSelection.bind(this);
     this.onUpload = this.onUpload.bind(this);
     this.onImportFormSave = this.onImportFormSave.bind(this);
     this.onImportOpen = this.onImportOpen.bind(this);
@@ -120,6 +122,7 @@ class App extends Component{
   }
 
   onClickRow(rowId){
+    const selectedRowId = rowId;
     const {data} = this.state;
     const receipt = data[rowId];
     const path = receipt.path;
@@ -132,11 +135,11 @@ class App extends Component{
       date : receipt.date,
       path : receipt.path
     };
-    this.setState({mode : "edit", receiptURL, formFields});
+    this.setState({mode : "edit", selectedRowId, receiptURL, formFields});
   }
 
   onEditClose(){
-    this.setState({mode : "view", receiptURL : null});
+    this.setState({mode : "view", selectedRowId : null, receiptURL : null});
   }
 
   onEditFormChange(event){
@@ -168,9 +171,18 @@ class App extends Component{
     this.setState({mode : "view"});
   }
 
+  onFileSelection(){
+    this.setState({receiptURL : null});
+  }
+
   onUpload(){
+    const {selectedRowId, data} = this.state;
     alert("Upload complete.");
-    this.setState({mode : "view"});
+    const receipt = data[selectedRowId];
+    const path = receipt.path;
+    const receiptURL = "/grandeur/receipts/receipt?filename=" + path;
+    this.setState({receiptURL});
+    //this.setState({mode : "view"});
   }
 
   onImportFormChange(event){
@@ -196,74 +208,62 @@ class App extends Component{
 
   render(){
     const {mode, data, receiptURL, searchFields, formFields} = this.state;
-    switch (mode){
-      case "search":
-        return (
-          <Dialog dialogClassName="react-dialog dialog-search">
-            <ActionLink onClick={this.onSearchClose} className="link dialog-close">Close</ActionLink>
-            <div className="InputFromTo">
-              <DateTimeRange
-                onStartDateChanged={this.onStartDateChanged}
-                onEndDateChanged={this.onEndDateChanged}
-                startDate={searchFields["startDate"]}
-                endDate={searchFields["endDate"]}
-              />
-            </div>
-            <div>
-              <TextField onChange={this.onSearchChange} name="vendor" value={searchFields["vendor"]} className="form-field" label="Vendor:" size="30" />
-            </div>
-            <div>
-              <TextField onChange={this.onSearchChange} name="amount" value={searchFields["amount"]} className="form-field" label="Amount:" size="20" />
-            </div>
-            <div>
-              <ActionLink onClick={this.onClearSearch} className="link">Clear</ActionLink>
-              <ActionLink onClick={this.onSearchSubmit} className="link">Search</ActionLink>
-            </div>
-          </Dialog>
-        );
-      case "edit":
-        return (
-          <Dialog dialogClassName="react-dialog dialog-edit">
-            <ActionLink onClick={this.onEditClose} className="link dialog-close">Close</ActionLink>
-            <UploadFile location={formFields["path"]} onUpload={this.onUpload} />
-            <PDF className="pdf-display" url={receiptURL} />
-            <EditForm
-              className="edit-form"
-              onChange={this.onEditFormChange}
-              onSave={this.onEditFormSave}
-              vendor={formFields["vendor"]}
-              amount={formFields["amount"]}
-              date={formFields["date"]}
+    return (
+      <Fragment>
+        <div>
+          <ActionLink onClick={this.onImportOpen} className="link">Import</ActionLink>
+          <ActionLink onClick={this.onSearchOpen} className="link">Search</ActionLink>
+        </div>
+        <div>
+          <ResultTable tableData={data ? Object.values(data) : null} columns={COLUMNS} onClickRow={this.onClickRow} />
+        </div>
+        <Dialog isOpen={mode === "search"} dialogClassName="react-dialog dialog-search">
+          <ActionLink onClick={this.onSearchClose} className="link dialog-close">Close</ActionLink>
+          <div className="InputFromTo">
+            <DateTimeRange
+              onStartDateChanged={this.onStartDateChanged}
+              onEndDateChanged={this.onEndDateChanged}
+              startDate={searchFields["startDate"]}
+              endDate={searchFields["endDate"]}
             />
-          </Dialog>
-        );
-      case "new":
-        return (
-          <Dialog dialogClassName="react-dialog dialog-import">
-            <ActionLink onClick={this.onImportClose} className="link dialog-close">Close</ActionLink>
-            <ImportForm
-              className="import-form"
-              onChange={this.onImportFormChange}
-              onSave={this.onImportFormSave}
-              vendor={formFields["vendor"]}
-              amount={formFields["amount"]}
-              date={formFields["date"]}
-            />
-          </Dialog>
-        );
-      default:
-        return (
-          <Fragment>
-            <div>
-              <ActionLink onClick={this.onImportOpen} className="link">Import</ActionLink>
-              <ActionLink onClick={this.onSearchOpen} className="link">Search</ActionLink>
-            </div>
-            <div>
-              <ResultTable tableData={data ? Object.values(data) : null} columns={COLUMNS} onClickRow={this.onClickRow} />
-            </div>
-          </Fragment>
-        );
-    };
+          </div>
+          <div>
+            <TextField onChange={this.onSearchChange} name="vendor" value={searchFields["vendor"]} className="form-field" label="Vendor:" size="30" />
+          </div>
+          <div>
+            <TextField onChange={this.onSearchChange} name="amount" value={searchFields["amount"]} className="form-field" label="Amount:" size="20" />
+          </div>
+          <div>
+            <ActionLink onClick={this.onSearchSubmit} className="link">Search</ActionLink>
+            <ActionLink onClick={this.onClearSearch} className="link">Clear</ActionLink>
+          </div>
+        </Dialog>
+        <Dialog isOpen={mode === "edit"} dialogClassName="react-dialog dialog-edit">
+          <ActionLink onClick={this.onEditClose} className="link dialog-close">Close</ActionLink>
+          <UploadFile location={formFields["path"]} onFileSelection={this.onFileSelection} onUpload={this.onUpload} />
+          <PDF className="pdf-display" url={receiptURL} />
+          <EditForm
+            className="edit-form"
+            onChange={this.onEditFormChange}
+            onSave={this.onEditFormSave}
+            vendor={formFields["vendor"]}
+            amount={formFields["amount"]}
+            date={formFields["date"]}
+          />
+        </Dialog>
+        <Dialog isOpen={mode === "new"} dialogClassName="react-dialog dialog-import">
+          <ActionLink onClick={this.onImportClose} className="link dialog-close">Close</ActionLink>
+          <ImportForm
+            className="import-form"
+            onChange={this.onImportFormChange}
+            onSave={this.onImportFormSave}
+            vendor={formFields["vendor"]}
+            amount={formFields["amount"]}
+            date={formFields["date"]}
+          />
+        </Dialog>
+      </Fragment>
+    );
   }
 }
 
